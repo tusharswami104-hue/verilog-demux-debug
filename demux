@@ -1,0 +1,33 @@
+src/demux.v 
+module mux_by_basicgate( input a,s1,s2, output op1,op2,op3,op4 );
+    assign op1 = (!s1)&(!s2)&a;
+    assign op2 = (!s1)&(s2)&a;
+    assign op3 = (s1)&(!s2)&a;
+    assign op4 = (s1)&(s2)&a;
+endmodule
+tb/tb_demux.v
+module tb_mux();
+            // where data is 
+            reg a= 1
+            ,s1,s2;
+            wire  op1,op2,op3,op4;
+             mux_by_basicgate mux ( .a(a),.s1(s1),.s2(s2),.op1(op1),.op2(op2),.op3(op3),.op4(op4));
+             initial
+              begin
+                  s1 = 0;
+                  s2 = 0;
+                  #30;
+                  s1 = 1;
+                  s2 = 0;
+                  #30;
+                  s1 = 0;
+                  s2 = 1;
+                  #30;
+                  s1 = 1;
+                  s2 = 1;
+                  #30;
+               end 
+endmodule
+
+                 
+
